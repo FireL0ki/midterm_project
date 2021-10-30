@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Berry-dex</title>
+
+
+    <!--Boostrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+
+    <!-- My style sheet -->
+    <link rel="stylesheet" type="text/css" href="berry_styles.css">
+
+    <!-- Responsive web page -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
+<body>
+    <!-- set up divs / containters -->
+
+    <div class="main-box">
+        
+        <h1>Berry-dex</h1>
+
+        <!-- This container holds the name, id, basic berry info.
+        & hypoethical picture, were it to exist-->
+        <div class="left-container">
+           <div class="left-container-header">
+            <p class="berry-name-container">
+                Name: <span class="berry-name"></span>
+            </p>
+            <p class="berry-id-container">
+                ID: <span class="berry-id"></span>
+            </p>
+           </div> 
+
+           <div class="harvest-stats">
+            <p class="harvest-time">
+                Harvest Time: <span class="berry-harvest-time"></span>
+            </p>
+            <p class="max-harvest">
+                Max Harvest (# of berries): <span class="berry-max-harvest"></span>
+            </p>
+        </div>
+
+           <div class="left-container-bottom">
+               <!--No images available in API :( / none in public domain.
+                I coded the hypothetical image source update code based
+                on if I could use images saved in the folder with the program-->
+               <img class="berry-image" id="berry-image">
+           </div>
+        </div>
+
+        <!-- Right container shows a list of berries-->
+        <div class="right-container">
+            <p class = "berry-list">
+                <span id="berry-list-title">Berry List</span><br>
+                <span id="cheri">cheri</span><br>
+                <span id="chesto">chesto</span><br>
+                <span id="pecha">pecha</span><br>
+                <span id="rawst">rawst</span><br>
+                <span id="aspear">aspear</span><br>
+                <span id="leppa">leppa</span><br>
+                <span id="oran">oran</span><br>
+                <span id="persim">persim</span><br>
+                <span id="lum">lum</span><br>
+                <span id="sitrus">sitrus</span><br>
+                <span id="figy">figy</span><br>
+                <span id="wiki">wiki</span><br>
+                <span id="mago">mago</span><br>
+                <span id="aguav">aguav</span><br>
+                <span id="iapapa">iapapa</span><br>
+                <span id="razz">razz</span><br>
+                <span id="bluk">bluk</span><br>
+                <span id="nanab">nanab</span><br>
+                <span id="wepear">wepear</span><br>
+                <span id="pinap">pinap</span><br>
+            </p>
+        </div>
+
+        <!-- Create search form, allow user to input berry name-->
+        <div class="search-input-box">
+            <label for="berry-name-input">Enter Berry Name: </label><input id="berry-name-input" name="berry-name-input">
+            <br>
+            <button id="search-button">Search</button>
+        </div>
+    </div>
+
+    <!--Connect to the JavaScript code-->
+    <script src="berry_app.js"></script>
+
+</body>
+
+</html>
