@@ -55,6 +55,6 @@ document.getElementById("search-button").addEventListener("click", function() {
        getBerryInformation(berrySearch) 
     }
 
-    // No images available on the API, & none in public domain that I can use
-    // document.getElementById("berry-image").src=`${berryNameInput}.png`
+    // Grab the search input and use it to update the image source and load the correct berry picture
+    document.getElementById("berry-image").src=`${berryNameInput}.png`
 })
