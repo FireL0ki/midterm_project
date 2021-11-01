@@ -57,5 +57,5 @@ document.getElementById("search-button").addEventListener("click", function() {
 
     // Grab the search input and use it to update the image source and load the correct berry picture
     // The getElementbyID is working, manual input works
-    document.getElementById("berry-image").src=`${berryNameInput}.png`
+    document.getElementById("berry-image").src=`${berryNameInput.outerHTML}.png`
 })
