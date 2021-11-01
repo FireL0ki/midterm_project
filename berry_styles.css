@@ -42,19 +42,15 @@ h1 {
 }
 
 .search-input-box {
+    width:25%;
+    margin:auto;
     background-color: grey;
     clear: both;
     padding: 10px;
-    margin: 10px;
     border: 5px solid black;
-    text-align:start;
+    text-align:center;
     font-size: 18px;
 }
-
-/* .berry-list {
-    padding: 2px;
-    background-color: lightcoral;
-} */
 
 #berry-list-title {
     font-weight:bolder;
