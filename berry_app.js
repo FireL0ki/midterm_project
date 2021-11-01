@@ -56,6 +56,6 @@ document.getElementById("search-button").addEventListener("click", function() {
     }
 
     // Grab the search input and use it to update the image source and load the correct berry picture
-    // The getElementbyID is working, manual input works
+    // The getElementbyID is working, manual input works, but the program cannot read the html input element perhaps?
     document.getElementById("berry-image").src=`${berryNameInput.outerHTML}.png`
 })
