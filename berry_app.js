@@ -9,8 +9,10 @@ let searchButton = document.querySelector('#search-button')
 let berryName = document.querySelector('.berry-name')
 let berryId = document.querySelector('.berry-id')
 let berryImage = document.querySelector('.berry-image')
-let berryHarvestTime = document.querySelector('berry-harvest-time')
-let berryMaxHarvest = document.querySelector('berry-max-harvest')
+let berryHarvestTime = document.querySelector('.berry-harvest-time')
+let berryMaxHarvest = document.querySelector('.berry-max-harvest')
+
+let berryFlavors = document.querySelector('.berry-flavors')
 
 // Get information from the API
 let fetchResult = fetch('https://pokeapi.co/api/v2/berry/') // connect to URL
@@ -31,12 +33,30 @@ fetch(`https://pokeapi.co/api/v2/berry/${berryNameInput}`)
     })
     .then(data => {
         console.log(data);
-        berryName.innerHTML = data['name']
-        berryId.innerHTML = data['id']
+        berryName.innerHTML = data.name
+        berryId.innerHTML = data.id
 
-        // TODO -- these aren't working- why?
-        // berryHarvestTime.innerHTML = data['growth_time']
-        // berryMaxHarvest.innerHTML = data['max_harvest']
+        berryHarvestTime.innerHTML = data.growth_time
+        berryMaxHarvest.innerHTML = data.max_harvest
+
+        // create empty array to hold berry flavors with potencies greater than 0 
+        // (berries that actually have any of that flavor profile)
+        // Later- add a doughnut chart to show the break down of flavor profiles?
+        let berryFlavorsArray = []
+        // create/define totalFlavorsArray to hold all the flavor profiles (each a separate object within the array)
+        let totalFlavorsArray = data.flavors
+
+       // loop over the array of flavors, check for flavor potencies greater than 0
+       // if the flavor potency is greater than zero (the berry has that flavor), add it to the new berryFlavorsArray
+        for (x = 0; x < totalFlavorsArray.length; x++) {
+            if (data.flavors[x].potency > 0) {
+                berryFlavorsArray.push(' ' + data.flavors[x].flavor.name)
+            }
+        }
+
+        // set the berry flavors to the html berryFlavors element
+        berryFlavors.innerHTML = berryFlavorsArray
+
     })
 }
 
@@ -57,5 +77,5 @@ document.getElementById("search-button").addEventListener("click", function() {
 
     // Grab the search input and use it to update the image source and load the correct berry picture
     // The getElementbyID is working, manual input works, but the program cannot read the html input element perhaps?
-    document.getElementById("berry-image").src=`${berryNameInput.outerHTML}.png`
+    document.getElementById("berry-image").src=`${berryNameInput}.png`
 })
