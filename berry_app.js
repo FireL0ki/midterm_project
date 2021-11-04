@@ -57,9 +57,64 @@ fetch(`https://pokeapi.co/api/v2/berry/${berryNameInput}`)
         // set the berry flavors to the html berryFlavors element
         berryFlavors.innerHTML = berryFlavorsArray
 
+        // extract the item URL for more info about this berry, including a sprite image 
+
+        let berryInfoURL = data.item.url 
+        // for example, https://pokeapi.co/api/v2/item/126/
+
+        return berryInfoURL  // pass this to the next then() handler
+
+    })
+    .then(berryInfoURL => {  // this argument is the return value from the previous then block - it will be itemUrl
+        return fetch(berryInfoURL)   // return the promise from the fetch call to the ber
+    })
+    .then( response => response.json() )   // parse the JSON response 
+    .then( berryInfo => {
+        // extract the sprite image URL 
+        let spriteURL = berryInfo.sprites.default
+        // set that as the src for the #berry-image
+        document.getElementById("berry-image").src = spriteURL
+
+    })
+    .catch(err => {   // don't forget to add an error handler
+        console.log(err)   // for you, the developer
+        alert('Sorry, unable to fetch berry information')
     })
 }
 
+function getBerrySprite(berryNameInput) {
+    fetch(`https://pokeapi.co/api/v2/berry/${berryNameInput}`)
+        .then(res => {
+            return res.json()
+        })
+        .then(data => {
+            console.log(data);
+            berryName.innerHTML = data.name
+            berryId.innerHTML = data.id
+    
+            berryHarvestTime.innerHTML = data.growth_time
+            berryMaxHarvest.innerHTML = data.max_harvest
+    
+            // create empty array to hold berry flavors with potencies greater than 0 
+            // (berries that actually have any of that flavor profile)
+            // Later- add a doughnut chart to show the break down of flavor profiles?
+            let berryFlavorsArray = []
+            // create/define totalFlavorsArray to hold all the flavor profiles (each a separate object within the array)
+            let totalFlavorsArray = data.flavors
+    
+           // loop over the array of flavors, check for flavor potencies greater than 0
+           // if the flavor potency is greater than zero (the berry has that flavor), add it to the new berryFlavorsArray
+            for (x = 0; x < totalFlavorsArray.length; x++) {
+                if (data.flavors[x].potency > 0) {
+                    berryFlavorsArray.push(' ' + data.flavors[x].flavor.name)
+                }
+            }
+    
+            // set the berry flavors to the html berryFlavors element
+            berryFlavors.innerHTML = berryFlavorsArray
+    
+        })
+    }
 
 // add an event listener to the search button
 // when the search button is clicked, get the value from the berry name in put box
@@ -73,9 +128,15 @@ document.getElementById("search-button").addEventListener("click", function() {
         alert("Please enter a berry name from the list")
     } else {
        getBerryInformation(berrySearch) 
-    }
 
-    // Grab the search input and use it to update the image source and load the correct berry picture
-    // The getElementbyID is working, manual input works, but the program cannot read the html input element perhaps?
-    document.getElementById("berry-image").src=`${berryNameInput}.png`
+        // Grab the search input and use it to update the image source and load the correct berry picture
+        // The getElementbyID is working, manual input works, but the program cannot read the html input element perhaps?
+    
+        // use the berrySearch variable - that's the text e.g. the string 'cheri'
+        // document.getElementById("berry-image").src=`${berrySearch}.png`
+
+        // alternatively, make a request to the API to fetch and display the image sprite 
+        // see code with the fetch request above
+
+    }
 })
